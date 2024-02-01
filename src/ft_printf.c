@@ -12,18 +12,27 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-t_list	*type_var(char type, va_list var)
+t_format	*type_var(char type, va_list var)
 {
-	t_list	*nodo;
+	t_format	tf ;
 
-	if (type == '%')
-		nodo = ft_lstnew ("%");
+	tf = new_format;
+	if (type == 'c')
+		tf.type = 'c';
+	else if (type == 's')
+		tf.type = 's';
+	else if (type == 'p')
+		tf.type = 'p';
+	else if (type == 'd')
+		tf.type = 'd';
 	else if (type == 'i')
-		nodo = ft_lstnew(ft_itoa(va_arg(var,int)));
-	else if(type == 'c')
-		nodo = ft_lstnew(var);
-	else if(type == 's')
-		nodo =ft_lstnew(var);
+		tf.type = 'i';
+	else if (type == 'u')
+		tf.type = 'u';
+	else if (type == 'x')
+		tf.type = 'X';
+	else if (type == '%')
+		tf.type = '%';
 	else
 		return (nodo = ft_lstnew("-1"));
 	return (nodo);
@@ -32,28 +41,17 @@ t_list	*type_var(char type, va_list var)
 int	ft_printf(const char *str, ...)
 {
 	int		count;
-	t_list	**nodos;
-	t_list	*nodo;
 	va_list	var;
 	char	*first;
 	int		i;
 	int		pos;
 
-	va_start(var, str);
-	pos = 0;
-	nodos = NULL;
-	i = 0;
-	first = NULL;
 	count = 0;
-	printf("p1\n");
-	while (str[i])
+	va_start(var, str);
+	while (*str)
 	{
-		
-		if (str[i] == '%')
+		if (*str == '%')
 		{
-			i++;
-			nodo = type_var(str[i], var);
-			first = (nodo->content);
 			ft_putstr_fd(first, 1);
 			count++;
 		}

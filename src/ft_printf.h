@@ -17,4 +17,14 @@
 # include "../libft/libft.h"
 # include <stdarg.h>
 
+typedef struct s_format
+{
+	char	type;
+}	t_format;
+
+# define TYPE "cspdiuxX%"
+
+# define X_LOW "0123456789abcdef"
+
+# define X_UPE "0123456789ABCDEF"
 #endif

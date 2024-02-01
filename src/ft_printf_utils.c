@@ -9,5 +9,10 @@
 /*   Updated: 2024/01/31 17:38:52 by jayala-b         ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
+#include "ft_printf.h"
 
-
+t_format	new_format(t_format tf)
+{
+	tf.type = 0;
+	return (tf);
+}
