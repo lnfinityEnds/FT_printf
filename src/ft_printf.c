@@ -12,11 +12,11 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-t_format	*type_var(char type, va_list var)
+t_format	type_var(char type, va_list var)
 {
-	t_format	tf ;
+	t_format	tf;
 
-	tf = new_format;
+	tf = new_format();
 	if (type == 'c')
 		tf.type = 'c';
 	else if (type == 's')
@@ -34,8 +34,9 @@ t_format	*type_var(char type, va_list var)
 	else if (type == '%')
 		tf.type = '%';
 	else
-		return (nodo = ft_lstnew("-1"));
-	return (nodo);
+		tf.type = 0;
+
+	return (tf);
 }
 
 int	ft_printf(const char *str, ...)
@@ -45,6 +46,7 @@ int	ft_printf(const char *str, ...)
 	char	*first;
 	int		i;
 	int		pos;
+	
 
 	count = 0;
 	va_start(var, str);
@@ -52,7 +54,7 @@ int	ft_printf(const char *str, ...)
 	{
 		if (*str == '%')
 		{
-			ft_putstr_fd(first, 1);
+			
 			count++;
 		}
 		else if (str[i - 1] != '%')
@@ -60,12 +62,12 @@ int	ft_printf(const char *str, ...)
 		i++;
 	}
 	va_end(var);
-	printf("%i",count);
+	printf("%i", count);
 	return (count);
 }
 
-int main()
+int	main(void)
 {
-	ft_printf("hola%i%i\n\n",10, 12);
+	ft_printf("hola%i%i\n\n", 10, 12);
 	printf("\nnormal :hola%%\n");
 }

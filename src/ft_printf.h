@@ -16,6 +16,7 @@
 // librerias
 # include "../libft/libft.h"
 # include <stdarg.h>
+# include "ft_printf_utils.c"
 
 typedef struct s_format
 {
@@ -27,4 +28,6 @@ typedef struct s_format
 # define X_LOW "0123456789abcdef"
 
 # define X_UPE "0123456789ABCDEF"
+
+t_format	new_format(void);
 #endif
