@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_put_ptr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayala-b <jayala-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/30 18:49:07 by jayala-b          #+#    #+#             */
-/*   Updated: 2023/11/30 18:49:09 by jayala-b         ###   ########.fr       */
+/*   Created: 2024/02/23 18:32:54 by jayala-b          #+#    #+#             */
+/*   Updated: 2024/02/23 18:32:56 by jayala-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
+#include "ft_printf.h"
 
-# define FT_PRINTF_H
-// librerias
-# include <stdarg.h>
+void	ft_putptr(void *ptr)
+{
+	char			*str;
+	unsigned long	ptr_address;
 
-
-# define TYPE "cspdiuxX%"
-
-# define X_LOW "0123456789abcdef"
-
-# define X_UPE "0123456789ABCDEF"
-
-void	ft_putptr(void *ptr);
-void	ft_putnbr_fd(int nb);
-int		put_int(int n);
-
-
-#endif
+	ptr_address = (unsigned long)ptr;
+	ft_putstr("0x");
+	str = ft_code_base(ptr_address, X_LOW);
+	ft_putstr(str);
+	free(str);
+}

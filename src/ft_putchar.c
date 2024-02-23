@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayala-b <jayala-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/30 18:49:07 by jayala-b          #+#    #+#             */
-/*   Updated: 2023/11/30 18:49:09 by jayala-b         ###   ########.fr       */
+/*   Created: 2024/02/23 18:27:06 by jayala-b          #+#    #+#             */
+/*   Updated: 2024/02/23 18:27:10 by jayala-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "ft_printf.h"
 
-#ifndef FT_PRINTF_H
+int	ft_putchar(char c)
+{
+	write(1, &c, 1);
+	return (1);
+}
 
-# define FT_PRINTF_H
-// librerias
-# include <stdarg.h>
+int	ft_putstr(char *str)
+{
+	int	i;
 
-
-# define TYPE "cspdiuxX%"
-
-# define X_LOW "0123456789abcdef"
-
-# define X_UPE "0123456789ABCDEF"
-
-void	ft_putptr(void *ptr);
-void	ft_putnbr_fd(int nb);
-int		put_int(int n);
-
-
-#endif
+	i = 0;
+	if (!str)
+	{
+		ft_putchar(str[i]);
+		i++;
+	}
+	return (i);
+}

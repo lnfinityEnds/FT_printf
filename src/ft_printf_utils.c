@@ -11,8 +11,24 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-t_format	new_format(t_format tf)
+void	ft_putnbr_fd(int nb)
 {
-	tf.type = 0;
-	return (tf);
+	char	c;
+
+	if (nb == -2147483648)
+	{
+		ft_putstr("-2147483648");
+		return ;
+	}
+	if (nb < 0)
+	{
+		ft_putchar('-' );
+		nb = -nb;
+	}
+	if (nb >= 10)
+	{
+		ft_putnbr(nb / 10);
+	}
+	c = nb % 10 + 48;
+	ft_putchar(c, 1);
 }

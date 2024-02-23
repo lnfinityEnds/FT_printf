@@ -12,62 +12,49 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-t_format	type_var(char type, va_list var)
+static int	type_var(const char *tsr, void *arg, size_t c)
 {
-	t_format	tf;
+	int	i;
 
-	tf = new_format();
-	if (type == 'c')
-		tf.type = 'c';
-	else if (type == 's')
-		tf.type = 's';
-	else if (type == 'p')
-		tf.type = 'p';
-	else if (type == 'd')
-		tf.type = 'd';
-	else if (type == 'i')
-		tf.type = 'i';
-	else if (type == 'u')
-		tf.type = 'u';
-	else if (type == 'x')
-		tf.type = 'X';
-	else if (type == '%')
-		tf.type = '%';
-	else
-		tf.type = 0;
-
-	return (tf);
+	i = 0;
+	if (*str == 'c')
+		i += ft_putchar((int)arg);
+	else if (*str == 's')
+		i += ft_putstr((char *)arg);
+	else if (*str == 'p')
+		i += putptr((unsigned long)arg);
+	else if (*str == 'd')
+		i + = put_int((int)arg);
+	else if (*str == 'i')
+		i + = put_int((int)arg);
+	else if (*str == 'u')
+		i += put_unsigned((unsigned int) arg);
+	else if (*str == 'x')
+		i + = ft_puthex(arg, i, X_LOW);
+	else if (*str == 'X')
+		i + = ft_puthex(arg, i, X_UE);
+	return (i);
 }
 
 int	ft_printf(const char *str, ...)
 {
-	int		count;
-	va_list	var;
-	char	*first;
-	int		i;
-	int		pos;
-	
+	va_list	args;
+	size_t	i;
 
-	count = 0;
-	va_start(var, str);
+	i = 0;
+	va_start(args, str);
 	while (*str)
 	{
 		if (*str == '%')
 		{
-			
-			count++;
+			str++;
+			if (ft_strchr("cspdiuxX", *str))
+				i += check_type(str, va_arg(args, void *), i);
+			else if (*str == '%')
+				i += print_char('%');
 		}
-		else if (str[i - 1] != '%')
-			ft_putchar_fd(str[i], 1);
-		i++;
+		else
+			i = i + ft_putchar(*str);
+		str++;
 	}
-	va_end(var);
-	printf("%i", count);
-	return (count);
-}
-
-int	main(void)
-{
-	ft_printf("hola%i%i\n\n", 10, 12);
-	printf("\nnormal :hola%%\n");
 }
